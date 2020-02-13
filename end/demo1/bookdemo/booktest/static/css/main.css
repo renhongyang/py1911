@@ -1,0 +1,20 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.con{
+    width: 500px;
+    margin: 0 auto;
+    color: cornflowerblue;
+}
+h1{
+    width: 500px;
+    margin: 0 auto;
+}
+h2{
+    width: 500px;
+    margin: 0 auto;
+}
+img{
+    width: 250px;
+}
