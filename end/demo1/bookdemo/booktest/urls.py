@@ -1,10 +1,12 @@
 from django.conf.urls import url
 from .import views
-
+app_name = 'booktest'
 urlpatterns = [
-    url(r'^index/$', views.index),
-    url(r'^list/$', views.list),
-    url(r'^about/$', views.about),
-    url(r'detail/(\d+)/', views.detail),
+
+    url(r'^$', views.index,name='index'),
+    url(r'^list/$', views.list,name='list'),
+    url(r'^about/$', views.about,name='about'),
+    url(r'^detail/(\d+)/$', views.detail,name='detail'),
+    url(r'^deletebook/(\d+)/$', views.deletebook,name='deletebook'),
 
 ]

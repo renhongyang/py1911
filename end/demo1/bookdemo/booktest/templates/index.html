@@ -12,9 +12,13 @@
 <!--    {{books}}-->
     <img src="/static/img/photo.jpg" alt="">
     <ul>
-        {% for book in books%}
-        <a href="/booktest/detail/{{book.id}}/"><li>{{book.id}}--{{book.title}}--{{book.price}}--{{book.upd_date}}</li></a>
-        {% endfor%}
+        <!--        <a href="/detail/{{book.id}}/"><li>{{book.id}}&#45;&#45;{{book.title}}&#45;&#45;{{book.price}}&#45;&#45;{{book.upd_date}}</li></a>-->
+        {% for book in books %}
+            <li>
+                <a href="{% url 'booktest:detail' book.id%}">{{book.id}}--{{book.title}}--{{book.price}}--{{book.upd_date}}</a>
+                <a href="{% url 'booktest:deletebook' book.id%}">删除书籍</a>
+            </li>
+        {% endfor %}
     </ul>
 </div>
 

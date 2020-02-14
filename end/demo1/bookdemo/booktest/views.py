@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect,reverse
 from django.template import loader
 from django.http import HttpResponse
 from .models import Book, Hero
@@ -19,6 +19,11 @@ def detail(requset,bookid):
     # result=templates.render(context)
     # return HttpResponse(result)
     return render(requset,'detail.html',{'book':book})
+
+def deletebook(request,bookid):
+    book=Book.object.get(id=bookid)
+    book.delete()
+    return redirect(to='/')
 
 
 def list(requset):
