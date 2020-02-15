@@ -50,5 +50,27 @@ class User(models.Model):
         verbose_name="用户类型类a"
         verbose_name_plural="用户类型类s"
 
+class Account(models.Model):
+    username = models.CharField(max_length=20,verbose_name="用户名")
+    password = models.CharField(max_length=20, verbose_name="用户密码")
+    regist_date = models.DateField(verbose_name="用户注册日期",default="2020-2-15")
+    #concact = models.OneToOneField('Concact',on_delete=models.CASCADE)
+
+class Concact(models.Model):
+    telephone = models.CharField(max_length=11, verbose_name="用户手机号")
+    email = models.EmailField(default="1751522491@qq.com", verbose_name="用户邮箱")
+    concact = models.OneToOneField('Account', on_delete=models.CASCADE,related_name='con')
+
+class Article(models.Model):
+    title=models.CharField(max_length=20,verbose_name="标题")
+    summary=models.TextField(verbose_name="内容")
+
+class Tag(models.Model):
+    name=models.CharField(max_length=10,verbose_name="标签名")
+    article=models.ManyToManyField(Article,related_name='tags')
+
+
+
+
 
 
