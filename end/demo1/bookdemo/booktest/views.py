@@ -3,22 +3,22 @@ from django.template import loader
 from django.http import HttpResponse
 from .models import Book, Hero
 
-def index(requset):
+def index(request):
     # templates=loader.get_template('index.html')
     books=Book.objects.all()
     # context={'books':books}
     # result=templates.render(context)
     # return HttpResponse(result)
     #简写
-    return render(requset,'index.html',{'books':books})
+    return render(request,'index.html',{'books':books})
 
-def detail(requset,bookid):
+def detail(request,bookid):
     #templates=loader.get_template('detail.html')
     book=Book.objects.get(id=bookid)
     # context={'book':book}
     # result=templates.render(context)
     # return HttpResponse(result)
-    return render(requset,'detail.html',{'book':book})
+    return render(request,'detail.html',{'book':book})
 
 def deletebook(request,bookid):
     book=Book.object.get(id=bookid)
@@ -87,11 +87,11 @@ def edithero(request,heroid):
 
 
 
-def list(requset):
+def list(request):
     return HttpResponse("这里是列表页")
-def about(requset):
+def about(request):
     return HttpResponse("这里是关于页")
-def jsondata(requset):
+def jsondata(request):
     return HttpResponse("{'name':'rhy','age':'20'}")
 
 # Create your views here.

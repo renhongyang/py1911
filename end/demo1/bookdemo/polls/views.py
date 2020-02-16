@@ -4,15 +4,25 @@ from django.http import HttpResponse
 from .models import Poll
 
 # Create your views here.
-def poll_index(requset):
+def poll_index(request):
 
     polls=Poll.objects.all()
-    return render(requset,'poll_index.html',{'polls':polls})
+    return render(request,'poll_index.html',{'polls':polls})
 
-def poll_detail(requset,pollid):
+def poll_detail(request,pollid):
 
     poll=Poll.objects.get(id=pollid)
-    return render(requset,'poll_detail.html',{'poll':poll})
+    if request.method=="GET":
+        return render(request, 'poll_detail.html', {'poll': poll})
+    elif request.method=="POST":
+        poll.num1  = request.POST.get("choose")
+        poll.num2 = request.POST.get("choose")
+        poll.num3 = request.POST.get("choose")
+        poll.num4 = request.POST.get("choose")
+        poll.save()
+        url = reverse("polls:poll_detail",args=(pollid,))
+        return redirect(to=url)
+
 
 def poll_show(requset,pollid):
 
