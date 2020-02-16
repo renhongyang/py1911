@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票详情</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body>
+<h1>这里是详情页</h1>
+<div class="con">
+    <h2>标题名：{{poll.poll_title}}</h2>
+<!--    {{poll.id}}-->
+
+<!--    <a href="/">返回列表页！</a>-->
+    <form action="#" method="post">
+        {% if poll.id == 1%}
+        投票选项：
+        <br>
+        <input type="radio" name="choose" value="1" checked>章子怡
+        <br>
+        <input type="radio" name="choose" value="2" checked>张柏芝
+        <br>
+        <input type="radio" name="choose" value="3" checked>都好看
+        <br>
+        <input type="radio" name="choose" value="4" checked>都不好看
+
+        {% elif poll.id == 2 %}
+
+        投票选项：
+        <br>
+        <input type="radio" name="choose" value="1" checked>梁朝伟
+        <br>
+        <input type="radio" name="choose" value="2" checked>张家辉
+        <br>
+        <input type="radio" name="choose" value="3" checked>都应该
+        <br>
+        <input type="radio" name="choose" value="4" checked>都不应该
+        {% else %}
+        投票选项：
+        <br>
+        <input type="radio" name="choose" value="yes" checked>是
+        <br>
+        <input type="radio" name="choose" value="no" checked>不是
+        <br>
+        {% endif%}
+        <br>
+        <input type="submit" value="提交投票">
+        <a href="{% url 'polls:poll_show' poll.id%}">提交投票！</a>
+
+    </form>
+    <a href="{% url 'polls:poll_index'%}">返回列表页！</a>
+</div>
+</body>
+</html>
