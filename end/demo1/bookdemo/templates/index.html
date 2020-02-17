@@ -10,7 +10,7 @@
 <h2>这里将显示所有书籍信息</h2>
 <div class="con">
 <!--    {{books}}-->
-    <a href="{% url 'polls:poll_index'%}"><h3>进入投票页面</h3></a>
+    <a href="{% url 'polls:index'%}"><h3>进入投票页面</h3></a>
     <img src="/static/img/photo.jpg" alt="">
     <ul>
         <!--        <a href="/detail/{{book.id}}/"><li>{{book.id}}&#45;&#45;{{book.title}}&#45;&#45;{{book.price}}&#45;&#45;{{book.upd_date}}</li></a>-->
@@ -23,6 +23,8 @@
         {% endfor %}
     </ul>
     <a href="{% url 'booktest:addbook'%}"><button>添加书籍</button></a>
+    <br>
+    <a href="http://127.0.0.1:8000/download/require.txt">下载 reuire文件</a>
 </div>
 
 </body>

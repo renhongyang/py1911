@@ -13,7 +13,7 @@ def index(request):
     return render(request,'index.html',{'books':books})
 
 def detail(request,bookid):
-    #templates=loader.get_template('detail.html')
+    # templates=loader.get_template('detail.html')
     book=Book.objects.get(id=bookid)
     # context={'book':book}
     # result=templates.render(context)

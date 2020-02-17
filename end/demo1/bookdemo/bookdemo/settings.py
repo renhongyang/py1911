@@ -23,9 +23,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'nid!l#xra^!k$k08hb5wev$js=8a-!-wq(3$&cv+-2oo-reamd'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+DEBUG = False
+
+ALLOWED_HOSTS = ['*']
+
+# DEBUG = True
+#
+# ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -38,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'booktest',
-    'polls'
+    'polls',
+    'download'
 ]
 
 MIDDLEWARE = [
@@ -121,4 +127,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
+# STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
+STATIC_ROOT = 'static'         # 新增行
+STATICFILES_DIRS = [os.path.join(BASE_DIR, '/static/')]# 修改地方

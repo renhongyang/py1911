@@ -16,10 +16,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 
+from django.views import static ##新增
+from django.conf import settings ##新增
+from django.conf.urls import url ##新增
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('booktest.urls',namespace='booktest')),
-    path('',include('polls.urls',namespace='polls')),
+    path('polls/',include('polls.urls',namespace='polls')),
+    path('download/',include('download.urls',namespace='download')),
 
+    ##　以下是新增
+    url(r'^static/(?P<path>.*)$', static.serve,
+        {'document_root': settings.STATIC_ROOT}, name='static'),
 ]
