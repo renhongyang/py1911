@@ -28,24 +28,24 @@
 
         投票选项：
         <br>
-        <input type="radio" name="choose1" value="{{poll.num1}}" checked>梁朝伟
+        <input type="radio" name="choose" value="{{poll.num1}}" checked>梁朝伟
         <br>
-        <input type="radio" name="choose2" value="{{poll.num2}}" checked>张家辉
+        <input type="radio" name="choose" value="{{poll.num2}}" checked>张家辉
         <br>
-        <input type="radio" name="choose3" value="{{poll.num3}}" checked>都应该
+        <input type="radio" name="choose" value="{{poll.num3}}" checked>都应该
         <br>
-        <input type="radio" name="choose4" value="{{poll.num4}}" checked>都不应该
+        <input type="radio" name="choose" value="{{poll.num4}}" checked>都不应该
         {% else %}
         投票选项：
         <br>
-        <input type="radio" name="choose1" value="{{poll.num1}}" checked>是
+        <input type="radio" name="choose" value="{{poll.num1}}" checked>是
         <br>
-        <input type="radio" name="choose2" value="{{poll.num2}}" checked>不是
+        <input type="radio" name="choose" value="{{poll.num2}}" checked>不是
         <br>
         {% endif%}
         <br>
         <input type="submit" value="提交投票">
-        <a href="{% url 'polls:poll_show' poll.id%}">提交投票！</a>
+<!--        <a href="{% url 'polls:poll_show' poll.id%}">提交投票！</a>-->
 
     </form>
     <a href="{% url 'polls:poll_index'%}">返回列表页！</a>
