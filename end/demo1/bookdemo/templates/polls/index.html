@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>投票首页</title>
-    <link rel="stylesheet" href="/static/css/main.css">
-</head>
-<body>
-    <div class="con">
+{% extends 'polls/base.html'%}
+{% block body %}
         <h2>投票问题列表</h2>
         <img src="/static/img/photo.jpg" alt="">
         <ul>
@@ -17,6 +10,5 @@
             {% endfor %}
         </ul>
         <a href="{% url 'booktest:index' %}"><button>返回首页</button></a>
-    </div>
-</body>
-</html>
+
+{%endblock%}

@@ -67,7 +67,7 @@ class Article(models.Model):
 
 class Tag(models.Model):
     name=models.CharField(max_length=10,verbose_name="标签名")
-    article=models.ManyToManyField(Article,related_name='tags')
+    article=models.ManyToManyField('Article',related_name='tags')
 
 
 

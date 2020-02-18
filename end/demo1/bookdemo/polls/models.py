@@ -1,6 +1,14 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
+class User(AbstractUser):
+    '''
+    自定义用户类继承django自带的用户系统
+    '''
+    telephone=models.CharField(max_length=11,verbose_name="手机号")
+    questions=models.ManyToManyField('Question')
+
 class Poll(models.Model):
     poll_title = models.CharField(max_length=20)
     num1 = models.CharField(max_length=5,default=0)

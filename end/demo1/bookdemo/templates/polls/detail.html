@@ -15,6 +15,7 @@
             <h3>选项有</h3>
 
             <form action="#" method="post">
+                {% csrf_token %}
                 {% for c in question.choices.all %}
                     {% if forloop.counter == 1 %}
                         <li><input type="radio" checked name="num" value="{{c.id}}">     {{c.content}}</li>

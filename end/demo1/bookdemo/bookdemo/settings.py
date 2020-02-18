@@ -24,13 +24,13 @@ SECRET_KEY = 'nid!l#xra^!k$k08hb5wev$js=8a-!-wq(3$&cv+-2oo-reamd'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = False
-
-ALLOWED_HOSTS = ['*']
-
-# DEBUG = True
+# DEBUG = False
 #
-# ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['*']
+
+DEBUG = True
+
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -51,7 +51,8 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-   # 'django.middleware.csrf.CsrfViewMiddleware',
+   # post检测
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -127,6 +128,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-# STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
-STATIC_ROOT = 'static'         # 新增行
-STATICFILES_DIRS = [os.path.join(BASE_DIR, '/static/')]# 修改地方
+STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
+STATIC_ROOT = '/static/'         # 新增行
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, '/static/')]# 修改地方
+#使用自定义用户类作为Django的认证类需要使用配置
+AUTH_USER_MODEL='polls.User'

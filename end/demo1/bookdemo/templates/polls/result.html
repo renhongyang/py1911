@@ -12,6 +12,7 @@
         <ul>
             <h3>得票情况</h3>
             {% for c in question.choices.all %}
+            {% csrf_token %}
                 <li>
                     <p>{{c.content}}   得票数：{{c.votes}}票</p>
                 </li>
