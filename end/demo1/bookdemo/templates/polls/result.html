@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>投票结果页</title>
-    <link rel="stylesheet" href="/static/css/main.css">
-</head>
-<body>
-    <div class="con">
+{% extends 'polls/base.html'%}
+    {% block title%}
+        <title>投票结果</title>
+    {% endblock %}
+
+{% block body %}
         <h2>问题是: {{question.title}}</h2>
 
         <ul>
@@ -20,6 +17,4 @@
         </ul>
 
         <a href="{% url 'polls:index' %}">返回</a>
-    </div>
-</body>
-</html>
+{% endblock %}
