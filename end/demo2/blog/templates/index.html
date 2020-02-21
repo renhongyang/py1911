@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load myfun%}
 {% block title %}
     博客首页
 {% endblock %}
@@ -10,7 +10,7 @@
 		<div class="row">
 				<div class="col-md-4 col-sm-5 col-xs-8">
 						<div class="logo">
-								<h1><a href="index.html"><b>博客首页</b></a></h1>
+								<h1><a href="{% url 'blogapp:index'%}"><b>博客首页</b></a></h1>
 						</div>
 				</div><!-- col-md-4 -->
 				<div class="col-md-8 col-sm-7 col-xs-4">
@@ -129,14 +129,14 @@
                 <article class="post post-1">
                     <header class="entry-header">
                         <h1 class="entry-title">
-                            <a href="{% url 'blogapp:single'%}">{{a.title}}</a>
+                            <a href="{% url 'blogapp:single' a.id%}">{{a.title}}</a>
                         </h1>
                         <div class="entry-meta">
                             <span class="post-category"><a href="#">{{a.category.name}}</a></span>
                             <span class="post-date"><a href="#"><time class="entry-date"
-                             datetime="2012-11-09T23:15:57+00:00">{{a.create_time|date:'Y年m月d日 H:i:s'}}</time></a></span>
+                             datetime="2012-11-09T23:15:57+00:00">{{a.create_time|dateFormat}}</time></a></span>
 <!--                            {{a.create_time|date:'Y-m-d H:i:s'}}-->
-                            <span class="post-author"><a href="#">{{a.author}}</a></span>
+                            <span class="post-author"><a href="#">{{a.author|authorFormat:"作者"}}</a></span>
                             <span class="comments-link"><a href="#">{{a.comment_set.count}} 评论</a></span>
                             <span class="views-count"><a href="#">{{a.views}}  阅读</a></span>
                         </div>
@@ -169,19 +169,19 @@
                 <div class="pagination col-md-11">
                     <ul>
                         {% if page.has_previous %}
-                            <li class="col-md-2"><a href="?pagenum={{page.previous_page_number}}">上一页</a></li>
+                            <li class="col-md-2"><a href="?pagenum={{page.previous_page_number}}&type={{type}}&year={{year}}&month={{month}}&category_id={{category_id}}&tag_id={{tag_id}}">上一页</a></li>
                         {% endif %}
 
                         {% for pn in page.paginator.page_range %}
                             {% if pn == page.number %}
-                                <li class="current col-md-1"><a href="?pagenum={{pn}}">{{pn}}</a></li>
+                                <li class="current col-md-1"><a href="?pagenum={{pn}}&type={{type}}&year={{year}}&month={{month}}&category_id={{category_id}}&tag_id={{tag_id}}">{{pn}}</a></li>
                             {% else %}
-                                <li class="col-md-1"><a href="?pagenum={{pn}}">{{pn}}</a></li>
+                                <li class="col-md-1"><a href="?pagenum={{pn}}&type={{type}}&year={{year}}&month={{month}}&category_id={{category_id}}&tag_id={{tag_id}}">{{pn}}</a></li>
                             {% endif %}
                         {% endfor %}
 
                         {% if page.has_next %}
-                        <li class="col-md-2"><a href="?pagenum={{page.next_page_number}}">下一页</a></li>
+                        <li class="col-md-2"><a href="?pagenum={{page.next_page_number}}&type={{type}}&year={{year}}&month={{month}}&category_id={{category_id}}&tag_id={{tag_id}}">下一页</a></li>
                         {% endif%}
                     </ul>
                 </div>
@@ -192,85 +192,97 @@
             <aside class="col-md-4">
                 <div class="widget widget-recent-posts">
                     <h3 class="widget-title">最新文章</h3>
+                    {% get_latestarticles as latestarticles %}
                     <ul>
-                        <li>
-                            <a href="#">Django 博客开发入门教程：前言</a>
-                        </li>
-                        <li>
-                            <a href="#">Django 博客使用 Markdown 自动生成文章目录</a>
-                        </li>
-                        <li>
-                            <a href="#">部署 Django 博客</a>
-                        </li>
+                        {% for article in latestarticles %}
+                            <li>
+                                <a href="{% url 'blogapp:single' article.id %}">{{article.title}}</a>
+                            </li>
+                        {% endfor %}
+<!--                        <li>-->
+<!--                            <a href="#">Django 博客使用 Markdown 自动生成文章目录</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="#">部署 Django 博客</a>-->
+<!--                        </li>-->
                     </ul>
                 </div>
                 <div class="widget widget-archives">
                     <h3 class="widget-title">归档</h3>
+                    {% get_latestdates as dates %}
                     <ul>
+                        {% for date in dates %}
                         <li>
-                            <a href="#">2019 年 5 月</a>
+                            <a href="?type=date&year={{date.year}}&month={{date.month}}">{{date.year}}年{{date.month}}月</a>
                         </li>
-                        <li>
-                            <a href="#">2019 年 4 月</a>
-                        </li>
-                        <li>
-                            <a href="#">2019 年 3 月</a>
-                        </li>
+                        {% endfor %}
+<!--                        <li>-->
+<!--                            <a href="#">2019 年 4 月</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="#">2019 年 3 月</a>-->
+<!--                        </li>-->
                     </ul>
                 </div>
 
                 <div class="widget widget-category">
                     <h3 class="widget-title">分类</h3>
+                    {% get_categorys as categorys %}
                     <ul>
+                        {% for c in categorys %}
                         <li>
-                            <a href="#">Django 博客教程 <span class="post-count">(13)</span></a>
+                            <a href="?type=category&category_id={{c.id}}">{{c.name}} <span class="post-count">({{c.article_set.count}})</span></a>
                         </li>
-                        <li>
-                            <a href="#">Python 教程 <span class="post-count">(11)</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Django 用户认证 <span class="post-count">(8)</span></a>
-                        </li>
+                        {% endfor%}
+<!--                        <li>-->
+<!--                            <a href="#">Python 教程 <span class="post-count">(11)</span></a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="#">Django 用户认证 <span class="post-count">(8)</span></a>-->
+<!--                        </li>-->
                     </ul>
                 </div>
 
                 <div class="widget widget-tag-cloud">
                     <h3 class="widget-title">标签云</h3>
+                    {% get_tags as tags %}
                     <ul>
+                        {% for tag in tags%}
                         <li>
-                            <a href="#">Django</a>
+                            <a href="?type=tag&tag_id={{tag.id}}">{{tag.name}}</a>
                         </li>
-                        <li>
-                            <a href="#">Python</a>
-                        </li>
-                        <li>
-                            <a href="#">Java</a>
-                        </li>
-                        <li>
-                            <a href="#">笔记</a>
-                        </li>
-                        <li>
-                            <a href="#">文档</a>
-                        </li>
-                        <li>
-                            <a href="#">AngularJS</a>
-                        </li>
-                        <li>
-                            <a href="#">CSS</a>
-                        </li>
-                        <li>
-                            <a href="#">JavaScript</a>
-                        </li>
-                        <li>
-                            <a href="#">Snippet</a>
-                        </li>
-                        <li>
-                            <a href="#">jQuery</a>
-                        </li>
+                        {% endfor %}
+<!--                        <li>-->
+<!--                            <a href="#">Python</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="#">Java</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="#">笔记</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="#">文档</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="#">AngularJS</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="#">CSS</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="#">JavaScript</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="#">Snippet</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="#">jQuery</a>-->
+<!--                        </li>-->
                     </ul>
                 </div>
                 <div class="rss">
-                    <a href=""><span class="ion-social-rss-outline"></span> RSS 订阅</a>
+                    <a href="{% url 'blogapp:rss' %}"><span class="ion-social-rss-outline"></span> RSS 订阅</a>
                 </div>
             </aside>
         </div>
