@@ -6,11 +6,20 @@ class Ads(models.Model):
     img = models.ImageField(upload_to='ads',verbose_name="图片")
     desc = models.CharField(max_length=20,null=True,blank=True,verbose_name="图片描述")
 
+    def __str__(self):
+        return self.desc
+
 class Category(models.Model):
     name = models.CharField(max_length=20,verbose_name="分类名")
 
+    def __str__(self):
+        return self.name
+
 class Tag(models.Model):
     name = models.CharField(max_length=20,verbose_name="标签名")
+
+    def __str__(self):
+        return self.name
 
 class Article(models.Model):
     title = models.CharField(max_length=30, verbose_name="文章标题")
@@ -24,13 +33,19 @@ class Article(models.Model):
     body = UEditorField(imagePath="imgs/" ,width='100%')
     tags = models.ManyToManyField(Tag)
 
+    def __str__(self):
+        return self.title
+
 class Comment(models.Model):
     name = models.CharField(max_length=20, verbose_name="评论人")
-    url = models.URLField(default="www.rhy.com", verbose_name="个人主页")
+    url = models.URLField(default="https://www.rhy.com", verbose_name="个人主页")
     email = models.EmailField(default="1751522491@qq.com", verbose_name="个人邮箱")
     body = models.CharField(max_length=500,verbose_name="评论内容")
     create_time = models.DateTimeField(auto_now_add=True,verbose_name="评论时间")
     article = models.ForeignKey(Article,on_delete=models.CASCADE,verbose_name="所属文章")
+
+    def __str__(self):
+        return self.name
 
 
 
