@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blogapp',
     'DjangoUeditor',
-    'blogapp.templatetags'
+    'blogapp.templatetags',
+    'haystack',
 ]
 
 MIDDLEWARE = [
@@ -133,4 +134,18 @@ X_FRAME_OPTIONS = 'sameorigin'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIAFILES_DIRS = [os.path.join(BASE_DIR, 'media')]
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'blogapp.whoosh_cn_backend.WhooshEngine',
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+    }
+}
+
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 3
+#设置对搜索结果的分页，每3项结果为一页。
+#索引生成设置
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+#这里设置实时更新索引
+
 

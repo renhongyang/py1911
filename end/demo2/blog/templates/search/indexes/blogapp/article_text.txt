@@ -1,0 +1,9 @@
+{{ object.title }}
+{{ object.body }}
+{{ object.author }}
+{{ object.category }}
+{{ object.views }}
+{{ object.create_time }}
+{{ object.id}}
+
+
