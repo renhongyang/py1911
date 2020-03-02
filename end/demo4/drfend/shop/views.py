@@ -14,8 +14,14 @@ class CategoryViewSets(viewsets.ModelViewSet):
     serializer_class 指明序列化类
     """
     queryset = Category.objects.all()
-    serializer_class = CategorySerizlizer
+    #serializer_class = CategorySerizlizer
+    def get_serializer_class(self):
+        return CategorySerizlizer
 
 class GoodViewSets(viewsets.ModelViewSet):
     queryset = Good.objects.all()
     serializer_class = GoodSerializer
+
+class GoodImgsViewSets(viewsets.ModelViewSet):
+    queryset = GoodImgs.objects.all()
+    serializer_class = GoodImgsSerializer
