@@ -38,14 +38,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'shop',
-    'rest_framework'
+    'rest_framework',
+    'django_filters'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -132,5 +133,64 @@ MEDIAFIELS_DIRS = [os.path.join(BASE_DIR,'media')]
 REST_FRAMEWORK = {
     # Schema
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.AutoSchema',
+    # 默认权限配置  每一个http方法都可以有对应的权限配置
+    # 全局配置  优先级高于视图类中的配置
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+    # 全局认证 优先级高于视图类中的配置
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+
+        # rest_framework_jwt
+        # rest_framework_simplejwt
+
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+
+        'rest_framework.authentication.SessionAuthentication',
+        # 默认首先使用session认证
+        # cookie与session  cookie是存储在浏览器上的非敏感数据
+        # session为存储在服务器上的敏感数据  但是session离不开cookie   因为session的sessionid 存储在浏览器中
+        # 发起请求时 需要在Cookie中携带 sessionid   csrftoken
+        # 在header中携带 X-CSRFToken  值可以在浏览器登录用户之后找cookie复制
+        #
+        #  默认首先使用basic认证 用户名密码
+        #  发起请求时  可以将用户名密码 进行编码 写入Authorization中然后 发起请求
+        #  将请求中携带的HTTP_AUTHORIZATION 进行解码 类似于 Basic cmh5OjEyMzQ1Ng==
+        #  进行解码处理得到对应的用户 获取用户成功，认证成功  获取失败 认证失败
+        'rest_framework.authentication.BasicAuthentication'
+    ],
+    #访问频次限制类
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle'
+    ],
+    #全局配置
+     'DEFAULT_THROTTLE_RATES': {
+        #匿名频次 seconds, minutes ,hour,day
+         'anon': '1000/day',
+        #用户频次
+        'user': '2000/day'
+     },
+    # 全局配置分页
+    #'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 2,
+
+    # 全局过滤
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 }
+
+# 应用名 模型名  推荐在没有数据库的前提 去配置
+AUTH_USER_MODEL = 'shop.User'
+
+# 自定义认证类   应用名.文件名.认证类名
+#AUTHENTICATION_BACKENDS = ('shop.authbackend.MyLoginBackend',)
+#AUTHENTICATION_BACKENDS = ['shop.authbackend.MyLoginBackend']
+
+# DRF提供了分页 pagination  建立在Django基础上  进行深层封装
+# from django.core.paginator import Paginator,Page
+# 分页       Paginator(将列表分成多个页)      Page(每一个页)
+
+
+
 
