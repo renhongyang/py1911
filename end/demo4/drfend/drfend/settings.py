@@ -39,10 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'shop',
     'rest_framework',
-    'django_filters'
+    'django_filters',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -165,19 +167,19 @@ REST_FRAMEWORK = {
         'rest_framework.throttling.UserRateThrottle'
     ],
     #全局配置
-     'DEFAULT_THROTTLE_RATES': {
-        #匿名频次 seconds, minutes ,hour,day
-         'anon': '1000/day',
-        #用户频次
-        'user': '2000/day'
-     },
+     # 'DEFAULT_THROTTLE_RATES': {
+     #    #匿名频次 seconds, minutes ,hour,day
+     #     'anon': '1000/day',
+     #    #用户频次
+     #    'user': '2000/day'
+     # },
     # 全局配置分页
     #'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 2,
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    # 'PAGE_SIZE': 2,
 
     # 全局过滤
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    # 'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 }
 
 # 应用名 模型名  推荐在没有数据库的前提 去配置
@@ -190,6 +192,9 @@ AUTH_USER_MODEL = 'shop.User'
 # DRF提供了分页 pagination  建立在Django基础上  进行深层封装
 # from django.core.paginator import Paginator,Page
 # 分页       Paginator(将列表分成多个页)      Page(每一个页)
+
+#允许跨域访问
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 

@@ -52,6 +52,7 @@ urlpatterns = [
     #url(r'^login/$', token_obtain_pair, name='login'),
     url(r'^obtaintoken/$', token_obtain_pair, name='login'),
     url(r'^refresh/$', token_refresh, name='refresh'),
+    url(r'^getuserinfo/$',getuserinfo),
 
     # url(r'^categorylist/$',categoryList,name='categorylist'),
     # url(r'^categorydetail/(\d+)/$',categoryDetail,name='categorydetail'),
