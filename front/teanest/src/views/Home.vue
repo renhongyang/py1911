@@ -438,9 +438,6 @@
                   </div>
               </div>
 
-
-
-
       </div>
 
       </div>
@@ -453,7 +450,6 @@ import {datas} from '../datas.js'
 export default {
   name: 'home',
   components: {
-
   },
     data(){
       return{
@@ -474,8 +470,6 @@ export default {
           goodsdata9:null,
           goodsdata10:null,
           goodsdata:null
-
-
       }
     },
     methods:{
@@ -488,7 +482,6 @@ export default {
         GoDetail(){
             this.$router.push("/detail")
         }
-
     },
     created() {
         // this.$http({
