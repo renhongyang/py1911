@@ -31,7 +31,7 @@
                         placeholder="请输入用户名">
                 </van-field>
                 <van-field
-                        v-model="phone"
+                        v-model="telephone"
                         label="手机号"
                         required
                         clearable
@@ -54,7 +54,7 @@
                     required>
                   </van-field>
                 <van-field
-                        v-model="password_again"
+                        v-model="password1"
                         type="password"
                         label="密码"
                         placeholder="请再次输入密码"
@@ -79,8 +79,8 @@
             return{
                 username:"",
                 password:"",
-                password_again:"",
-                phone:"",
+                password1:"",
+                telephone:"",
                 sms:"",
                 checked: false
 
@@ -92,16 +92,24 @@
                 this.$router.push("/");
             },
             onClickRight() {
-                this.$router.push("/login");
+                this.$router.push("/login/");
             },
             register() {
-                if(this.username.length<=0||this.password.length<=6||this.password_again.length<=6||this.password!==this.password_again||this.phone.length!==11||this.sms.length!==6||this.checked!==true){
+                if(this.username.length<=0||this.password.length<6||this.password1.length<6||this.password!==this.password1||this.telephone.length!==11||this.sms.length!==6||this.checked!==true){
                     this.$toast("必填项不能为空！或者输入有误！")
                 }else {
-                    this.$toast("注册成功！");
-                    this.$router.push("/login")
+                    // this.$toast("注册成功！");
+                    this.$api.regist({
+                        username:this.username,
+                        password:this.password,
+                        password1:this.password1,
+                        telephone:this.telephone
+                    }).then(res=>{
+                        this.$router.push("/login/")
+                    }).catch(err=>{
+                        this.$toast("注册失败")
+                    })
                 }
-
             },
         }
     }

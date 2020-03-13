@@ -28,7 +28,7 @@
                         <span style="font-size: 14px;color: #b3b3b3;line-height:50px">使用手机号和验证码登录！</span>
                         <van-cell-group>
                             <van-field
-                                    v-model="phone"
+                                    v-model="telephone"
                                     label="手机号"
                                     required
                                     clearable
@@ -114,7 +114,7 @@
         data(){
             return{
                 active: 2,
-                phone:"",
+                telephone:"",
                 sms:"",
                 loginusername:"",
                 loginpassword:"",
@@ -129,7 +129,7 @@
                 // this.$toast('返回首页');
             },
             login_phone(){
-                if(this.phone.length!==11||this.sms.length!==6||this.checked!==true){
+                if(this.telephone.length!==11||this.sms.length!==6||this.checked!==true){
                     this.$toast("必填项不能为空！或者输入有误")
                 }else {
                     localStorage.setItem("login",true);
@@ -137,21 +137,36 @@
                     //     this.$router.push(this.$route.query.t);
                     // }
                     this.$toast("登陆成功！");
-                    this.$router.push("/mine");
+                    this.$router.push("/mine/");
                 }
 
             },
             login_normal(){
-                if(this.loginusername.length<=0||this.loginpassword.length<=6||this.checked!==true){
+                if(this.loginusername.length<=0||this.loginpassword.length<6||this.checked!==true){
                     this.$toast("必填项不能为空！或者输入有误，请重新输入！")
                 }else {
-                    localStorage.setItem("login",true);
+
                     // if(this.$route.query.t){
                     //     this.$router.push(this.$route.query.t);
                     // }
+                    // this.$api.getToken({
+                    //     username:this.loginusername,
+                    //     password:this.loginpassword
+                    // }).then(res=>{
+                    //     console.log("得到Token",res);
+                    //     this.$jsCookie.set("refresh",res.data.refresh);
+                    //     this.$jsCookie.set("access",res.data.access);
+                    //     this.$jsCookie.set("username",this.username);
+                    //     this.$router.push("mine");
+                    //     this.$store.commit("setLog",true)
 
+                    // }).catch(err=>{
+                    //     console.log("发生错误",err);
+                    //     this.$toast("登录出错")
+                    // });
+                    localStorage.setItem("login",true);
                     this.$toast("登陆成功！");
-                    this.$router.push("/mine");
+                    this.$router.push("/mine/");
 
                 }
 
