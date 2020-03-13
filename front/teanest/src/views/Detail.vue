@@ -20,12 +20,12 @@
 
         <div class="con">
             <div class="good_name">
-                <p>2017年凤牌滇红 云茶滇品（te级功夫红茶） 滇红茶 250克/袋</p>
+                <p>{{detailgood.name}}</p>
             </div>
             <div class="good_price">
-                <p>￥35元</p>
+                <p>￥{{detailgood.price}}</p>
                 <p>￥75元</p>
-                <p>销量：453份</p>
+                <p>销量：{{detailgood.sellnum}}份</p>
                 <p>库存：75份</p>
             </div>
 
@@ -85,7 +85,8 @@
                     "//www.chawo.com/data/upload/shop/store/goods/2/2019/05/2_06117656286763140_360.jpg",],
 
                 show:false,
-                buyNum:1
+                buyNum:1,
+                detailgood:""
             }
         },
         methods:{
@@ -107,10 +108,28 @@
         },
 
 
-        // created() {
-        //     this.detail_data1=detail_data1;
-        //     console.log(detail_data1);
-        // }
+        created() {
+            this.$api.getGoodsDetail({
+                id:this.$route.params.id
+            }).then(res=>{
+                // console.log("请求数据",res);
+                this.detailgood = res.data
+            }).catch(err=>{
+                console.log("请求出错",err);
+            });
+            // this.$http({
+            //     url: `http://127.0.0.1:8000/api/v1/goods/${param.id}/`,
+            //     method: "get"
+            // }).then(res=>{
+            //     // console.log(res.data,111);
+            //     if (res.data.code === 200)
+            //         console.log(res.data.code,333);
+            //     this.detailgood = res.data;
+            //     // console.log(this.detailgood,222);
+            // }).catch(err=>{
+            //     console.log("发生错误",err)
+            // });
+        }
     }
 
 

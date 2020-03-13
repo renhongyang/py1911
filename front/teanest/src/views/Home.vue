@@ -19,11 +19,10 @@
           </div>
 
           <div class="section">
-
               <div>
                   <van-swipe :autoplay="3000" indicator-color="white">
-                      <van-swipe-item  v-for="(item,index) in imgdata ">
-                          <img :src="item.image" alt="" style="width:100%">
+                      <van-swipe-item  v-for="(item,index) in ads ">
+                          <img :src="item.img" alt="" style="width:100%">
                       </van-swipe-item>
                   </van-swipe>
               </div>
@@ -112,22 +111,18 @@
 
               </div>
               <br>
-              
+
               <div class="tea_title">
                   <img src="http://www.chawo.com/wap/images/toutiao.jpg" alt="">
                   <van-swipe :autoplay="3000" style="height: 50px;" vertical>
-                      <van-swipe-item><a href="https://mp.weixin.qq.com/s/ZZWAWr2QD26FO0eD43abqQ">春茶 | 板山皇家古茶园正在热卖中，此时不出...</a></van-swipe-item>
-                      <van-swipe-item><a href="https://mp.weixin.qq.com/s/BjEpnKeenm8ApM3sVaQpiw">深度 | 为什么大益熟茶皆出精品？尤其是8592...</a></van-swipe-item>
-                      <van-swipe-item><a href="https://mp.weixin.qq.com/s/QZ-YwU8-SJKBwDwy_pU4kw">解密 | 关于中茶厚德的那些机密事,99%的人都...</a></van-swipe-item>
-                      <van-swipe-item><a href="https://mp.weixin.qq.com/s/9HzM9J1ux9gfNeHrBdUDeA">春茶 | 万万没想到，勐库早春东半山竟然这么...</a></van-swipe-item>
-                      <van-swipe-item><a href="https://mp.weixin.qq.com/s/GSjkVI7qbeHh76bGGdr0Cw">推荐 | 7年的时间，大雪山从未让失望过，堪...</a></van-swipe-item>
-                      <van-swipe-item><a href="https://mp.weixin.qq.com/s/pAzuWkX-K69yiDMkasa6ow">评测 | 2016年中茶传世印级，红印铁饼，茶....</a></van-swipe-item>
-                      <van-swipe-item><a href="https://mp.weixin.qq.com/s/SGn5xDw1PikqtkUlx_jK7w">科普 | 普洱茶界最具代表性的熟茶之一，中....</a></van-swipe-item>
-                      <van-swipe-item><a href="https://mp.weixin.qq.com/s/AtNvqeIfiheI4sH-4KVVWQ">推荐 | 困鹿山凭什么被称之为皇家贡茶园？...</a></van-swipe-item>
+                      <van-swipe-item v-for="item in article">
+                          <a :href="item.url">{{item.title}}"</a>
+                      </van-swipe-item>
                   </van-swipe>
               </div>
 
-<!--              <div class="image" v-for="(item,index) in index_data">-->
+
+              <!--              <div class="image" v-for="(item,index) in index_data">-->
 <!--                  <div v-for="(item1,index) in item">-->
 <!--                      <a :href="item1.data"><img :src="item1.image" alt="" style="width:100%"></a>-->
 <!--                  </div>-->
@@ -135,7 +130,8 @@
               <br>
               <div>
 
-                  <a href="http://www.chawo.com/wap/tmpl/product_list.html?keyword=2019%E5%B9%B4%E8%80%81%E5%90%8C%E5%BF%97%20%E5%90%8D%E5%B1%B1%E7%B3%BB%E5%88%97"><img src="http://www.chawo.com/data/upload/mobile/special/s0/s0_06102178107647533.jpg" alt="" style="width:100%"></a>
+                  <a href="http://www.chawo.com/wap/tmpl/product_list.html?keyword=2019%E5%B9%B4%E8%80%81%E5%90%8C%E5%BF%97%20%E5%90%8D%E5%B1%B1%E7%B3%BB%E5%88%97">
+                      <img src="http://www.chawo.com/data/upload/mobile/special/s0/s0_06102178107647533.jpg" alt="" style="width:100%"></a>
 
               </div>
               <br>
@@ -151,118 +147,51 @@
 <!--                          format="DD 天 HH 时 mm 分 ss 秒">-->
 <!--                  </van-count-down>-->
                   <ul>
-                      <li>
-<!--                          <a href="http://www.chawo.com/wap/tmpl/product_detail.html?goods_id=107505">-->
-                          <router-link to="/detail">
-                          <img src="//www.chawo.com/data/upload/shop/store/goods/2/2019/05/2_06117653595331760_240.jpg">
+                      <li v-for="item in timegood">
+                          <router-link :to="'/detail/'+item.id+'/'">
+                              <img :src="item.img">
                           </router-link>
-<!--                          </a>-->
-                          <p class="goods-name">2017年凤牌滇红 云茶滇品（te级功夫红茶） 滇红茶 250克/袋</p>
-                          <p><span class="goods-price">￥35.00</span><span class="none-price">￥50.00</span></p>
+                          <p class="goods-name">{{item.name}}</p>
+                          <p><span class="goods-price">￥{{item.price}}</span><span class="none-price">￥{{item.old_price}}</span></p>
                       </li>
-
-                      <li><a href="http://www.chawo.com/wap/tmpl/product_detail.html?goods_id=108266">
-                      <img src="//www.chawo.com/data/upload/shop/store/goods/2/2019/08/2_06196347466379582_240.jpg"></a>
-                          <p class="goods-name">2019年润元昌 开门红 熟茶 357克/饼</p>
-                          <p><span class="goods-price">￥59.00</span>
-                              <span class="none-price">￥168.00</span></p>
-                      </li>
-
-                      <li><a href="http://www.chawo.com/wap/tmpl/product_detail.html?goods_id=105308">
-                          <img src="//www.chawo.com/data/upload/shop/store/goods/6/2019/02/6_06046900839891446_240.jpg"></a>
-                          <p class="goods-name">2019年白沙溪 茯缘 安化黑茶 原叶金花手筑茯砖 750克/片</p>
-                          <p><span class="goods-price">￥178.00</span><span class="none-price">￥178.00</span></p>
-                      </li>
-
-                      <li>
-                          <a href="http://www.chawo.com/wap/tmpl/product_detail.html?goods_id=109066">
-                              <img src="//www.chawo.com/data/upload/shop/store/goods/2/2020/01/2_06314667884652568_240.jpg"></a>
-                          <p class="goods-name">大益 下关 中茶 八角亭 老同志 年货节茶样大礼包 8克/份 共计30份</p>
-                          <p><span class="goods-price">￥99.00</span><span class="none-price">￥199.00</span></p>
-                      </li>
-
-                      <li><a href="http://www.chawo.com/wap/tmpl/product_detail.html?goods_id=107263">
-                          <img src="//www.chawo.com/data/upload/shop/store/goods/2/2019/04/2_06099538472045491_240.jpg"></a>
-                          <p class="goods-name">2017年妙贡堂 管阳一号 白茶(寿眉) 300克/饼</p>
-                          <p><span class="goods-price">￥99.00</span><span class="none-price">￥260.00</span></p>
-                      </li>
-                      <li><a href="http://www.chawo.com/wap/tmpl/product_detail.html?goods_id=105398">
-                      <img src="//www.chawo.com/data/upload/shop/store/goods/2/2018/05/2_05802981138272905_240.jpg"></a>
-                      <p class="goods-name">千山叶 茉莉花茶 125克/罐 1罐</p>
-                          <p><span class="goods-price">￥58.00</span><span class="none-price">￥70.00</span></p>
-                      </li>
-                      <li><a href="http://www.chawo.com/wap/tmpl/product_detail.html?goods_id=109060">
-                      <img src="//www.chawo.com/data/upload/shop/store/goods/2/2020/01/2_06313888502213105_240.jpg"></a>
-                      <p class="goods-name">2016年下关 南诏金芽沱茶 生茶 200克/沱 10沱</p>
-                      <p><span class="goods-price">￥288.00</span><span class="none-price">￥700.00</span></p>
-                  </li>
-                      <li><a href="http://www.chawo.com/wap/tmpl/product_detail.html?goods_id=108405">
-                      <img src="//www.chawo.com/data/upload/shop/store/goods/2/2019/09/2_06207628231955402_240.jpg"></a>
-                      <p class="goods-name">2019年千山叶 红叶金螺·蜜香金螺 滇红工夫红茶 400克/袋</p>
-                      <p><span class="goods-price">￥128.00</span><span class="none-price">￥208.00</span></p>
-                  </li>
-                      <li><a href="http://www.chawo.com/wap/tmpl/product_detail.html?goods_id=109013">
-                          <img src="//www.chawo.com/data/upload/shop/store/goods/6/2019/12/6_06297190591733270_240.jpg"></a>
-                          <p class="goods-name">中茶蝴蝶白茶 5809子鼠开天 庚子鼠年生肖纪念茶 白牡丹饼 357克/饼</p>
-                          <p><span class="goods-price">￥296.00</span><span class="none-price">￥296.00</span></p>
-                      </li>
-                      <li><a href="http://www.chawo.com/wap/tmpl/product_detail.html?goods_id=108916">
-                          <img src="//www.chawo.com/data/upload/shop/store/goods/2/2020/01/2_06313884372599713_240.jpg"></a>
-                          <p class="goods-name">2010年大益 7452 熟茶 357克/饼 整提</p>
-                          <p><span class="goods-price">￥748.00</span><span class="none-price">￥1299.00</span></p>
-                      </li>
-                      <li><a href="http://www.chawo.com/wap/tmpl/product_detail.html?goods_id=106692">
-                          <img src="//www.chawo.com/data/upload/shop/store/goods/2/2018/12/2_05987941053388899_240.jpg"></a>
-                          <p class="goods-name">2018年大益 小龙柱 1801批 熟茶 357克/饼</p>
-                          <p><span class="goods-price">￥175.00</span><span class="none-price">￥228.00</span></p>
-                       </li>
-                      <li><a href="http://www.chawo.com/wap/tmpl/product_detail.html?goods_id=105372">
-                          <img src="//www.chawo.com/data/upload/shop/store/goods/2/2020/01/2_06313886928084191_240.jpg"></a>
-                          <p class="goods-name">2015年八角亭 普洱金毫 熟茶 200克/饼 整提</p>
-                          <p><span class="goods-price">￥358.00</span><span class="none-price">￥1260.00</span></p>
-                       </li>
-                      <li><a href="http://www.chawo.com/wap/tmpl/product_detail.html?goods_id=108328">
-                          <img src="//www.chawo.com/data/upload/shop/store/goods/3/2019/09/3_06207019864016246_240.jpg"></a>
-                          <p class="goods-name">容天180cc 原矿朱泥【奉春燕作品】 宜兴紫砂壶</p>
-                          <p><span class="goods-price">￥488.00</span><span class="none-price">￥898.00</span></p>
-                        </li>
-                      <li><a href="http://www.chawo.com/wap/tmpl/product_detail.html?goods_id=105869">
-                      <img src="//www.chawo.com/data/upload/shop/store/goods/2/2018/06/2_05826502617617098_240.jpg"></a>
-                      <p class="goods-name">2015年佤山映象 7561 熟茶 250克/砖</p>
-                      <p><span class="goods-price">￥38.00</span><span class="none-price">￥138.00</span></p>
-                  </li>
-
                   </ul>
               </div>
 
-              <div class="kind">
+
+              <div class="kind" >
                   <div class="item-pic">
                       <a href="http://www.chawo.com/wap">
                           <img src="//www.chawo.com/data/upload/mobile/special/s0/s0_06111652008392456.png" alt="" style="width: 100%">
                       </a>
                   </div>
 
-                  <div class="nav-img">
-                      <div class="home3-img" v-for="(item,index) in home3data">
-                          <a :href="item.data"><img :src="item.image" alt="" style="width: 187px"></a>
+                  <div v-for="(item,index) in indexgood" v-if="item.category === 1" >
+                      <div class="nav-img" >
+                          <a href="#"><img :src="item.img"  alt="" style="width: 187px"></a>
                       </div>
                   </div>
               </div>
 
-              <div class="good_list">
+
+
+              <div class="good_list" >
                   <div class="item-pic">
                       <a href="http://www.chawo.com/wap/tmpl/tag.html">
                           <img src="//www.chawo.com/data/upload/mobile/special/s0/s0_06111655294608459.png" alt="" style="width: 100%">
                       </a>
                   </div>
 
-                  <div class="goods-img" @click="GoDetail">
-                      <div class="good-img" v-for="(item,index) in goodsdata1">
-                          <img :src="item.goods_image" alt="" style="width: 170px">
-                          <p>{{item.goods_name}}</p>
-                          <p>￥{{item.goods_promotion_price}}</p>
+                  <div class="goods-img">
+                      <div class="good-img" v-for="(item,index) in indexgood" v-if="item.category === 2">
+                          <router-link :to="'/detail/'+item.id+'/'">
+                              <img :src="item.img" style="width: 170px">
+                          </router-link>
+<!--                          <img :src="item.img" alt="" >-->
+                          <p>{{item.name}}</p>
+                          <p>￥{{item.price}}</p>
                       </div>
                   </div>
+
               </div>
 
               <div class="good_list">
@@ -272,11 +201,11 @@
                       </a>
                   </div>
 
-                  <div class="goods-img">
-                      <div class="good-img" v-for="(item,index) in goodsdata2">
-                          <img :src="item.goods_image" alt="" style="width: 170px">
-                          <p>{{item.goods_name}}</p>
-                          <p>￥{{item.goods_promotion_price}}</p>
+                  <div class="goods-img" @click="GoDetail"  >
+                      <div class="good-img" v-for="(item,index) in indexgood" v-if="item.category === 3">
+                          <img :src="item.img" alt="" style="width: 170px">
+                          <p>{{item.name}}</p>
+                          <p>￥{{item.price}}</p>
                       </div>
                   </div>
               </div>
@@ -288,11 +217,11 @@
                       </a>
                   </div>
 
-                  <div class="goods-img">
-                      <div class="good-img" v-for="(item,index) in goodsdata3">
-                          <img :src="item.goods_image" alt="" style="width: 170px">
-                          <p>{{item.goods_name}}</p>
-                          <p>￥{{item.goods_promotion_price}}</p>
+                  <div class="goods-img" @click="GoDetail"  >
+                      <div class="good-img" v-for="(item,index) in indexgood" v-if="item.category === 4">
+                          <img :src="item.img" alt="" style="width: 170px">
+                          <p>{{item.name}}</p>
+                          <p>￥{{item.price}}</p>
                       </div>
                   </div>
               </div>
@@ -304,11 +233,11 @@
                       </a>
                   </div>
 
-                  <div class="goods-img">
-                      <div class="good-img" v-for="(item,index) in goodsdata4">
-                          <img :src="item.goods_image" alt="" style="width: 170px">
-                          <p>{{item.goods_name}}</p>
-                          <p>￥{{item.goods_promotion_price}}</p>
+                  <div class="goods-img" @click="GoDetail"  >
+                      <div class="good-img" v-for="(item,index) in indexgood" v-if="item.category === 5">
+                          <img :src="item.img" alt="" style="width: 170px">
+                          <p>{{item.name}}</p>
+                          <p>￥{{item.price}}</p>
                       </div>
                   </div>
               </div>
@@ -320,11 +249,11 @@
                       </a>
                   </div>
 
-                  <div class="goods-img">
-                      <div class="good-img" v-for="(item,index) in goodsdata5">
-                          <img :src="item.goods_image" alt="" style="width: 170px">
-                          <p>{{item.goods_name}}</p>
-                          <p>￥{{item.goods_promotion_price}}</p>
+                  <div class="goods-img" @click="GoDetail"  >
+                      <div class="good-img" v-for="(item,index) in indexgood" v-if="item.category === 6">
+                          <img :src="item.img" alt="" style="width: 170px">
+                          <p>{{item.name}}</p>
+                          <p>￥{{item.price}}</p>
                       </div>
                   </div>
               </div>
@@ -336,11 +265,11 @@
                       </a>
                   </div>
 
-                  <div class="goods-img">
-                      <div class="good-img" v-for="(item,index) in goodsdata6">
-                          <img :src="item.goods_image" alt="" style="width: 170px">
-                          <p>{{item.goods_name}}</p>
-                          <p>￥{{item.goods_promotion_price}}</p>
+                  <div class="goods-img" @click="GoDetail"  >
+                      <div class="good-img" v-for="(item,index) in indexgood" v-if="item.category === 7">
+                          <img :src="item.img" alt="" style="width: 170px">
+                          <p>{{item.name}}</p>
+                          <p>￥{{item.price}}</p>
                       </div>
                   </div>
               </div>
@@ -352,11 +281,11 @@
                       </a>
                   </div>
 
-                  <div class="goods-img">
-                      <div class="good-img" v-for="(item,index) in goodsdata7">
-                          <img :src="item.goods_image" alt="" style="width: 170px">
-                          <p>{{item.goods_name}}</p>
-                          <p>￥{{item.goods_promotion_price}}</p>
+                  <div class="goods-img" @click="GoDetail"  >
+                      <div class="good-img" v-for="(item,index) in indexgood" v-if="item.category === 8">
+                          <img :src="item.img" alt="" style="width: 170px">
+                          <p>{{item.name}}</p>
+                          <p>￥{{item.price}}</p>
                       </div>
                   </div>
               </div>
@@ -368,11 +297,11 @@
                       </a>
                   </div>
 
-                  <div class="goods-img">
-                      <div class="good-img" v-for="(item,index) in goodsdata8">
-                          <img :src="item.goods_image" alt="" style="width: 170px">
-                          <p>{{item.goods_name}}</p>
-                          <p>￥{{item.goods_promotion_price}}</p>
+                  <div class="goods-img" @click="GoDetail"  >
+                      <div class="good-img" v-for="(item,index) in indexgood" v-if="item.category === 9">
+                          <img :src="item.img" alt="" style="width: 170px">
+                          <p>{{item.name}}</p>
+                          <p>￥{{item.price}}</p>
                       </div>
                   </div>
               </div>
@@ -384,11 +313,11 @@
                       </a>
                   </div>
 
-                  <div class="goods-img">
-                      <div class="good-img" v-for="(item,index) in goodsdata9">
-                          <img :src="item.goods_image" alt="" style="width: 170px">
-                          <p>{{item.goods_name}}</p>
-                          <p>￥{{item.goods_promotion_price}}</p>
+                  <div class="goods-img" @click="GoDetail"  >
+                      <div class="good-img" v-for="(item,index) in indexgood" v-if="item.category === 10">
+                          <img :src="item.img" alt="" style="width: 170px">
+                          <p>{{item.name}}</p>
+                          <p>￥{{item.price}}</p>
                       </div>
                   </div>
               </div>
@@ -400,11 +329,11 @@
                       </a>
                   </div>
 
-                  <div class="goods-img">
-                      <div class="good-img" v-for="(item,index) in goodsdata10">
-                          <img :src="item.goods_image" alt="" style="width: 170px">
-                          <p>{{item.goods_name}}</p>
-                          <p>￥{{item.goods_promotion_price}}</p>
+                  <div class="goods-img" @click="GoDetail"  >
+                      <div class="good-img" v-for="(item,index) in indexgood" v-if="item.category === 11">
+                          <img :src="item.img" alt="" style="width: 170px">
+                          <p>{{item.name}}</p>
+                          <p>￥{{item.price}}</p>
                       </div>
                   </div>
               </div>
@@ -416,11 +345,11 @@
                       </a>
                   </div>
 
-                  <div class="goods-img">
-                      <div class="good-img" v-for="(item,index) in goodsdata">
-                          <img :src="item.goods_image" alt="" style="width: 170px">
-                          <p>{{item.goods_name}}</p>
-                          <p>￥{{item.goods_promotion_price}}</p>
+                  <div class="goods-img" @click="GoDetail"  >
+                      <div class="good-img" v-for="(item,index) in indexgood" v-if="item.category === 12">
+                          <img :src="item.img" alt="" style="width: 170px">
+                          <p>{{item.name}}</p>
+                          <p>￥{{item.price}}</p>
                       </div>
                   </div>
               </div>
@@ -429,14 +358,15 @@
                       <img src="//www.chawo.com/data/upload/mobile/special/s0/s0_06227404716647644.jpg" alt="" width="100%">
                   </a>
               </div>
-              <div class="footer" >
-                  <div class="nav-text">
-                      <a href="http://localhost:8080/#/mine">登录</a>
-                      <a href="http://localhost:8080/#/regist">注册</a>
-                      <a href="http://www.chawo.com/wap/tmpl/member/login.html">反馈</a>
-                      <a href="http://localhost:8080/#/" class="gotop">返回顶部</a>
-                  </div>
-              </div>
+
+<!--              <div class="footer" >-->
+<!--                  <div class="nav-text">-->
+<!--                      <a href="http://localhost:8080/#/mine">登录</a>-->
+<!--                      <a href="http://localhost:8080/#/regist">注册</a>-->
+<!--                      <a href="http://www.chawo.com/wap/tmpl/member/login.html">反馈</a>-->
+<!--                      <a href="http://localhost:8080/#/" class="gotop">返回顶部</a>-->
+<!--                  </div>-->
+<!--              </div>-->
 
       </div>
 
@@ -445,7 +375,7 @@
 </template>
 
 <script>
-import {datas} from '../datas.js'
+// import {datas} from '../datas.js'
 
 export default {
   name: 'home',
@@ -453,23 +383,12 @@ export default {
   },
     data(){
       return{
+          ads:[],
+          article:[],
+          timegood:[],
+          indexgood:[],
           time: 30 * 60 * 60 * 1000,
-          index_data:null,
-          value:"大益",
-          img_list:null,
-          imgdata:null,
-          home3data:null,
-          goodsdata1:null,
-          goodsdata2:null,
-          goodsdata3:null,
-          goodsdata4:null,
-          goodsdata5:null,
-          goodsdata6:null,
-          goodsdata7:null,
-          goodsdata8:null,
-          goodsdata9:null,
-          goodsdata10:null,
-          goodsdata:null
+          value:"",
       }
     },
     methods:{
@@ -480,46 +399,65 @@ export default {
             this.$router.push("/search")
         },
         GoDetail(){
-            this.$router.push("/detail")
+            this.$router.push("/detail/10/")
         }
     },
     created() {
-        // this.$http({
-        //     url: `http://www.chawo.com/mobile/index.php`,
-        //     method: "get"
-        // }).then(res=>{
-        //     console.log(res.data.datas);
-        //     if (res.data.code === 200) {
-        //         this.index_data = res.data.datas;
-        //         // this.getdata=res.data.data;
-        //         // console.log(res.data.data.adv_list.item);
-        //         // res是response的简写
-        //         console.log(res.data.datas);
-        //         console.log(res.data);
-        //         // console.log(res.data.data);
-        //
-        //     }
-        // });
-        // this.img_list=img_list;
-        this.imgdata=datas.datas[0].adv_list.item;
-        this.home3data=datas.datas[3].home3.item;
-        this.goodsdata1=datas.datas[5].goods.item;
-        this.goodsdata2=datas.datas[7].goods.item;
-        this.goodsdata3=datas.datas[9].goods.item;
-        this.goodsdata4=datas.datas[11].goods.item;
-        this.goodsdata5=datas.datas[13].goods.item;
-        this.goodsdata6=datas.datas[15].goods.item;
-        this.goodsdata7=datas.datas[17].goods.item;
-        this.goodsdata8=datas.datas[19].goods.item;
-        this.goodsdata9=datas.datas[21].goods.item;
-        this.goodsdata10=datas.datas[23].goods.item;
-        this.goodsdata=datas.datas[25].goods.item;
-        // console.log(this.img_list);
-        // console.log(this.imgdata);
-        // console.log(this.home3data);
-        // console.log(this.goodsdata);
+        // 获取ads
+        this.$http({
+            url: `http://127.0.0.1:8000/api/v1/ads/`,
+            method: "get"
+        }).then(res=>{
+            // console.log(res.data,111);
+            if (res.data.code === 200)
+                console.log(res.data.code,333);
+            this.ads = res.data;
+            // console.log(this.ads,222);
+        }).catch(err=>{
+            console.log("发生错误",err)
+        });
+        // 获取文章
+        this.$http({
+            url: `http://127.0.0.1:8000/api/v1/articles/`,
+            method: "get"
+        }).then(res=>{
+            // console.log(res.data,111);
+            if (res.data.code === 200)
+                console.log(res.data.code,333);
+            this.article = res.data;
+            // console.log(this.article_data,222);
+        }).catch(err=>{
+            console.log("发生错误",err)
+        });
+        // 获取限时商品
+        this.$http({
+            url: `http://127.0.0.1:8000/api/v1/timegoods/`,
+            method: "get"
+        }).then(res=>{
+            // console.log(res.data,111);
+            if (res.data.code === 200)
+                console.log(res.data.code,333);
+            this.timegood = res.data;
+            // console.log(this.timegood,222);
+        }).catch(err=>{
+            console.log("发生错误",err)
+        });
+        // 获取首页展示商品
+        this.$http({
+            url: `http://127.0.0.1:8000/api/v1/indexgoods/`,
+            method: "get"
+        }).then(res=>{
+            // console.log(res.data,111);
+            if (res.data.code === 200)
+                console.log(res.data.code,333);
+            this.indexgood = res.data;
+            // console.log(this.indexgood,222);
+        }).catch(err=>{
+            console.log("发生错误",err)
+        });
 
 
+        
     }
 
 }
@@ -594,38 +532,49 @@ export default {
             }
         }
     }
+
     .kind{
-        display: block;
+        display: flex;
         width: 100%;
+        /*overflow-x: auto;*/
+        /*border: solid 2px #DB4453;*/
+        flex-wrap: wrap;
+        justify-content: space-around;
         .nav-img{
-            display: flex;
+            display: block;
             width: 100%;
-            flex-wrap: wrap;
+
+
         }
     }
+
+
     .good_list{
-        display: block;
+        display: flex;
+        flex-wrap: wrap;
         width: 100%;
-        .goods-img{
-            display: flex;
-            width: 100%;
-            flex-wrap: wrap;
-            .good-img{
-                width: 50%;
-                border-top: solid 1px #f56868;
-                p:nth-of-type(1) {
-                    font-size: 0.85rem;
-                    line-height: 1rem;
-                    color: #000;
-                }
-                p:nth-of-type(2){
-                    color: #DB4453;
-                }
-            }
-
-
+    }
+    .goods-img{
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    .good-img{
+        width: 50%;
+        border-top: solid 1px #f56868;
+        p:nth-of-type(1) {
+            font-size: 0.85rem;
+            line-height: 1rem;
+            color: #000;
+        }
+        p:nth-of-type(2){
+            color: #DB4453;
         }
     }
+
+
+
+
 
 
 

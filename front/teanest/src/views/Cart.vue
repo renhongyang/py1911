@@ -12,7 +12,8 @@
         </div>
 
         <div>
-            <van-card v-for="(item,index) in $store.getters.getGoodList"
+            <van-card
+                    v-for="(item,index) in $store.getters.getGoodList"
                       :num="item.num"
                       title="[头春滇红]2019年 凤庆滇红 大金芽(滇红金芽) 红茶 250克"
                       price="35元"
@@ -77,7 +78,6 @@
         data(){
             return{
                 islogin:localStorage.getItem("login"),
-                red_tea:null,
                 checked:false,
 
             }
@@ -112,7 +112,7 @@
             }
         },
         created() {
-            this.red_tea=red_tea;
+
         }
     }
 

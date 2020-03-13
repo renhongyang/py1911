@@ -19,7 +19,7 @@ from teanest.views import *
 from django.conf.urls import url
 from django.views.static import serve
 from .settings import MEDIA_ROOT
-
+from rest_framework_simplejwt.views import token_obtain_pair,token_refresh
 # 引入API文档路由
 from rest_framework.documentation import include_docs_urls
 
@@ -29,6 +29,15 @@ router = routers.DefaultRouter()
 
 # 可以通过router默认路由注册资源
 router.register('ads', AdsViewSets)
+router.register('articles', ArticlesViewSets)
+router.register('categorys', CategoryViewSets)
+router.register('goods', GoodsViewSets)
+router.register('indexcategory', IndexcategorysViewSets)
+router.register('indexgoods', IndexgoodsViewSets)
+router.register('timegoods', TimegoodsViewSets)
+router.register('brands', BrandsViewSets)
+router.register('users', UsersViewSets)
+router.register('orders', OrdersViewSets)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -40,4 +49,10 @@ urlpatterns = [
     url('media/(?P<path>.*)',serve, {'document_root': MEDIA_ROOT}),
     # API文档地址
     path('api/v1/docs/', include_docs_urls(title="RestFulAPI", description="RestFulAPI v1")),
+
+    # 先通过用户名密码 得到Token  VUE将refresh以及access保存  通过access请求服务器   通过refresh获取新的access
+    url(r'^obtaintoken/$',token_obtain_pair,name='login'),
+    url(r'^refreshtoken/$',token_refresh,name='refresh'),
+
+
 ]

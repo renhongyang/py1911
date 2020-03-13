@@ -14,7 +14,63 @@ from django.views import View
 from rest_framework.views import APIView
 from rest_framework import generics
 from rest_framework import mixins
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 
 class AdsViewSets(viewsets.ModelViewSet):
     queryset = Ads.objects.all()
-    serializer_class = AdsSerializers
+    serializer_class = AdsSerializer
+
+class ArticlesViewSets(viewsets.ModelViewSet):
+    queryset = Articles.objects.all()
+    serializer_class = ArticlesSerializer
+
+class CategoryViewSets(viewsets.ModelViewSet):
+
+    queryset = Categorys.objects.all()
+
+    def get_serializer_class(self):
+        return CategorysSerizlizer
+
+class GoodsViewSets(viewsets.ModelViewSet):
+    queryset = Goods.objects.all()
+    serializer_class = GoodsSerializer
+
+    #filterset_fields = ["name"]
+    # 局部过滤配置
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+
+    filterset_fields = ["name"]
+    search_fields = ["name"]
+    ordering_fields = ["id"]
+
+class IndexcategorysViewSets(viewsets.ModelViewSet):
+    queryset = Indexcategorys.objects.all()
+    serializer_class = IndexcategorysSerializer
+
+class IndexgoodsViewSets(viewsets.ModelViewSet):
+    queryset = Indexgoods.objects.all()
+    serializer_class = IndexgoodsSerializer
+
+class TimegoodsViewSets(viewsets.ModelViewSet):
+    queryset = Timegoods.objects.all()
+    serializer_class = TimegoodsSerializer
+
+class BrandsViewSets(viewsets.ModelViewSet):
+    queryset = Brands.objects.all()
+    serializer_class = BrandsSerializer
+
+class OrdersViewSets(viewsets.ModelViewSet):
+    queryset = Orders.objects.all()
+    serializer_class = OrderSerializer
+
+class UsersViewSets(viewsets.GenericViewSet,mixins.CreateModelMixin, mixins.RetrieveModelMixin,mixins.UpdateModelMixin,mixins.DestroyModelMixin):
+
+    queryset = User.objects.all()
+    # serializer_class = UserSerializer
+
+    def get_serializer_class(self):
+        #print("action代表http方法",self.action)
+        if self.action == "create":
+            return UserRegisterSerializer
+        return UserSerializer

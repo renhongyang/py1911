@@ -8,6 +8,7 @@
                     @click-right="onClickRight"
             >
                 <input v-model="value" id="searchinput" slot="title" placeholder="请输入搜索内容" />
+                {{search}}
 
                 <van-icon name="search" slot="right" ></van-icon>>
             </van-nav-bar>
@@ -33,6 +34,7 @@
         data(){
             return{
                 value:"",
+                search:[],
                 hotsearch:["中茶","大益","下关","七彩云南","八角亭","紫砂"],
                 historySearch: JSON.parse(localStorage.getItem("historySearch"))||[]
             }
@@ -54,6 +56,18 @@
                 }
                 else{
                     this.$toast(`搜索了${this.value}`);
+                    this.$http({
+                        url: `http://127.0.0.1:8000/api/v1/goods/?search=value`,
+                        method: "get"
+                    }).then(res=>{
+                        console.log(res.data,111);
+                        if (res.data.code === 200)
+                            console.log(res.data.code,333);
+                        this.search = res.data;
+                        console.log(this.search,222);
+                    }).catch(err=>{
+                        console.log("发生错误",err)
+                    });
                     this.historySearch.unshift(this.value);
                     console.log(this.historySearch);
                     localStorage.setItem("historySearch",JSON.stringify(this.historySearch));

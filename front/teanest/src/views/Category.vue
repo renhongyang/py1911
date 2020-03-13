@@ -18,193 +18,186 @@
 <!--                    </van-sidebar-item>-->
 <!--                </van-sidebar>-->
                 <van-tabs>
-                    <van-tab v-for="(name,index) in names" :title="name">
-<!--                        <p>{{name}}</p>-->
+                    <van-tab v-for="(item,index) in categorys" :title="item.title">
+
                         <div class="con-brands" v-if="index===0">
-                            <div class="brands" v-for="(item,index) in brands_list" @click="search(item)">
+                            <div class="brands" v-for="(item,index) in brands"  @click="search(item)">
                                 <!--                    <router-link :to="'/category/'+item.brand_id">-->
-                                <img :src="item.brand_pic" alt="">
-                                <p>{{item.brand_name}}</p>
+                                <img :src="item.img" alt="">
+                                <p>{{item.name}}</p>
                                 <!--                    </router-link>-->
                             </div>
                         </div>
 
+
                         <div class="tea" v-if="index===1">
-                            <div v-for="(tea,index) in puer_tea" @click="GoDetail">
+                            <div v-for="(tea,index) in goods" v-if="tea.category === 2" >
+                                <router-link :to="'/detail/'+tea.id+'/'">
+                                    <van-card
+                                            :price="tea.prise"
+                                            :desc="tea.desc"
+                                            :title="tea.name"
+                                            :thumb="tea.img">
+                                        <div slot="tags" class="tags">
+                                            <van-tag plain type="danger">销量：{{tea.sellnum}}</van-tag>
+                                        </div>
+                                    </van-card>
+                                </router-link>
+                                <br>
+                            </div>
+                        </div>
+
+                        <div class="tea" v-if="index===2">
+                            <div v-for="(tea,index) in goods" v-if="tea.category === 3" >
+                                <router-link :to="'/detail/'+tea.id+'/'">
                                 <van-card
                                         :price="tea.prise"
                                         :desc="tea.desc"
                                         :title="tea.name"
-                                        :thumb="tea.tea_img">
+                                        :thumb="tea.img">
                                     <div slot="tags" class="tags">
-                                        <van-tag plain type="danger">销量：{{tea.number}}</van-tag>
+                                        <van-tag plain type="danger">销量：{{tea.sellnum}}</van-tag>
+                                    </div>
+                                </van-card>
+                                </router-link>
+                                <br>
+                            </div>
+                        </div>
+
+
+                        <div class="tea" v-if="index===3">
+                            <div v-for="(tea,index) in goods" v-if="tea.category === 4" @click="GoDetail">
+                                <router-link :to="'/detail/'+tea.id+'/'">
+                                <van-card
+                                        :price="tea.prise"
+                                        :desc="tea.desc"
+                                        :title="tea.name"
+                                        :thumb="tea.img">
+                                    <div slot="tags" class="tags">
+                                        <van-tag plain type="danger">销量：{{tea.sellnum}}</van-tag>
+                                    </div>
+                                </van-card>
+                                </router-link>
+                                <br>
+                            </div>
+                        </div>
+
+                        <div class="tea" v-if="index===4">
+                            <div v-for="(tea,index) in goods" v-if="tea.category === 5" @click="GoDetail">
+                                <van-card
+                                        :price="tea.prise"
+                                        :desc="tea.desc"
+                                        :title="tea.name"
+                                        :thumb="tea.img">
+                                    <div slot="tags" class="tags">
+                                        <van-tag plain type="danger">销量：{{tea.sellnum}}</van-tag>
                                     </div>
                                 </van-card>
                                 <br>
                             </div>
                         </div>
 
-                        <div class="tea" v-if="index===2" >
-                            <div v-for="(tea,index) in red_tea" @click="GoDetail">
+                        <div class="tea" v-if="index===5">
+                            <div v-for="(tea,index) in goods" v-if="tea.category === 6" @click="GoDetail">
                                 <van-card
                                         :price="tea.prise"
                                         :desc="tea.desc"
                                         :title="tea.name"
-                                        :thumb="tea.tea_img">
+                                        :thumb="tea.img">
                                     <div slot="tags" class="tags">
-                                        <van-tag plain type="danger">销量：{{tea.number}}</van-tag>
+                                        <van-tag plain type="danger">销量：{{tea.sellnum}}</van-tag>
                                     </div>
                                 </van-card>
                                 <br>
                             </div>
                         </div>
 
-                        <div class="tea" v-if="index===3" >
-                            <div v-for="(tea,index) in green_tea" @click="GoDetail">
+                        <div class="tea" v-if="index===6">
+                            <div v-for="(tea,index) in goods" v-if="tea.category === 7" @click="GoDetail">
                                 <van-card
                                         :price="tea.prise"
                                         :desc="tea.desc"
                                         :title="tea.name"
-                                        :thumb="tea.tea_img">
+                                        :thumb="tea.img">
                                     <div slot="tags" class="tags">
-                                        <van-tag plain type="danger">销量：{{tea.number}}</van-tag>
+                                        <van-tag plain type="danger">销量：{{tea.sellnum}}</van-tag>
                                     </div>
                                 </van-card>
                                 <br>
                             </div>
                         </div>
 
-                        <div class="tea" v-if="index===4" >
-                            <div v-for="(tea,index) in wul_tea" @click="GoDetail">
+                        <div class="tea" v-if="index===7">
+                            <div v-for="(tea,index) in goods" v-if="tea.category === 8" @click="GoDetail">
                                 <van-card
                                         :price="tea.prise"
                                         :desc="tea.desc"
                                         :title="tea.name"
-                                        :thumb="tea.tea_img">
+                                        :thumb="tea.img">
                                     <div slot="tags" class="tags">
-                                        <van-tag plain type="danger">销量：{{tea.number}}</van-tag>
+                                        <van-tag plain type="danger">销量：{{tea.sellnum}}</van-tag>
                                     </div>
                                 </van-card>
                                 <br>
                             </div>
                         </div>
 
-                        <div class="tea" v-if="index===5" >
-                            <div v-for="(tea,index) in black_tea" @click="GoDetail">
+                        <div class="tea" v-if="index===8">
+                            <div v-for="(tea,index) in goods" v-if="tea.category === 9" @click="GoDetail">
                                 <van-card
                                         :price="tea.prise"
                                         :desc="tea.desc"
                                         :title="tea.name"
-                                        :thumb="tea.tea_img">
+                                        :thumb="tea.img">
                                     <div slot="tags" class="tags">
-                                        <van-tag plain type="danger">销量：{{tea.number}}</van-tag>
+                                        <van-tag plain type="danger">销量：{{tea.sellnum}}</van-tag>
                                     </div>
                                 </van-card>
                                 <br>
                             </div>
                         </div>
 
-                        <div class="tea" v-if="index===6" >
-                            <div v-for="(tea,index) in white_tea" @click="GoDetail">
+                        <div class="tea" v-if="index===9">
+                            <div v-for="(tea,index) in goods" v-if="tea.category === 10" @click="GoDetail">
                                 <van-card
                                         :price="tea.prise"
                                         :desc="tea.desc"
                                         :title="tea.name"
-                                        :thumb="tea.tea_img">
+                                        :thumb="tea.img">
                                     <div slot="tags" class="tags">
-                                        <van-tag plain type="danger">销量：{{tea.number}}</van-tag>
+                                        <van-tag plain type="danger">销量：{{tea.sellnum}}</van-tag>
                                     </div>
                                 </van-card>
                                 <br>
                             </div>
                         </div>
 
-
-                        <div class="tea" v-if="index===7" >
-                            <div v-for="(tea,index) in flowers_tea" @click="GoDetail">
+                        <div class="tea" v-if="index===10">
+                            <div v-for="(tea,index) in goods" v-if="tea.category === 11" @click="GoDetail">
                                 <van-card
                                         :price="tea.prise"
                                         :desc="tea.desc"
                                         :title="tea.name"
-                                        :thumb="tea.tea_img">
+                                        :thumb="tea.img">
                                     <div slot="tags" class="tags">
-                                        <van-tag plain type="danger">销量：{{tea.number}}</van-tag>
+                                        <van-tag plain type="danger">销量：{{tea.sellnum}}</van-tag>
                                     </div>
                                 </van-card>
                                 <br>
                             </div>
                         </div>
-
-                        <div class="tea" v-if="index===8" >
-                            <div v-for="(tea,index) in tea_books" @click="GoDetail">
-                                <van-card
-                                        :price="tea.prise"
-                                        :desc="tea.desc"
-                                        :title="tea.name"
-                                        :thumb="tea.tea_img">
-                                    <div slot="tags" class="tags">
-                                        <van-tag plain type="danger">销量：{{tea.number}}</van-tag>
-                                    </div>
-                                </van-card>
-                                <br>
-                            </div>
-                        </div>
-
-
-                        <div class="tea" v-if="index===9" >
-                            <div v-for="(tea,index) in tea_gao" @click="GoDetail">
-                                <van-card
-                                        :price="tea.prise"
-                                        :desc="tea.desc"
-                                        :title="tea.name"
-                                        :thumb="tea.tea_img">
-                                    <div slot="tags" class="tags">
-                                        <van-tag plain type="danger">销量：{{tea.number}}</van-tag>
-                                    </div>
-                                </van-card>
-                                <br>
-                            </div>
-                        </div>
-
-                        <div class="tea" v-if="index===10" >
-                            <div v-for="(tea,index) in tea_tools" @click="GoDetail">
-                                <van-card
-                                        :price="tea.prise"
-                                        :desc="tea.desc"
-                                        :title="tea.name"
-                                        :thumb="tea.tea_img">
-                                    <div slot="tags" class="tags">
-                                        <van-tag plain type="danger">销量：{{tea.number}}</van-tag>
-                                    </div>
-                                </van-card>
-                                <br>
-                            </div>
-                        </div>
-
-
-
 
 
                     </van-tab>
                 </van-tabs>
             </div>
-
-
-
-
-
-
         </div>
-
-
-
     </div>
 
 
 </template>
 
 <script>
-    import {brands,puer_tea,red_tea,green_tea,wul_tea,black_tea,white_tea,flowers_tea,tea_tools,tea_gao,tea_books} from '../datas.js'
     export default {
         name: 'category',
         components: {
@@ -214,18 +207,10 @@
             return{
                 activeKey: "",
                 vulue:"",
-                brands_list: null,
-                names:["品牌推荐","普洱茶","红茶","绿茶","乌龙茶","黑茶","白茶","花草茶","茶书","茶膏","茶具"],
-                puer_tea:null,
-                red_tea:null,
-                green_tea:null,
-                wul_tea:null,
-                black_tea:null,
-                white_tea:null,
-                flowers_tea:null,
-                tea_tools:null,
-                tea_gao:null,
-                tea_books:null
+                categorys:[],
+                brands:[],
+                goods:[]
+
 
         }
 
@@ -241,35 +226,57 @@
             //     console.log(index,this.activeKey);
             // }
             search(item){
-                this.$toast(`搜索了${item.brand_name}`);
+                this.$toast(`搜索了${item.name}`);
             },
             GoDetail(){
                 this.$router.push("/detail")
             }
         },
         created() {
-            this.brands_list=brands.datas.brand_list;
-            this.puer_tea=puer_tea;
-            this.red_tea=red_tea;
-            this.green_tea=green_tea;
-            this.wul_tea=wul_tea;
-             this.black_tea=black_tea;
-             this.white_tea=white_tea;
-             this.flowers_tea=flowers_tea;
-             this.tea_books=tea_books;
-             this.tea_gao=tea_gao;
-             this.tea_tools=tea_tools;
-            // console.log(this.brands_list);
 
+            this.$http({
+                url: `http://127.0.0.1:8000/api/v1/categorys/`,
+                method: "get"
+            }).then(res=>{
+                // console.log(res.data,111);
+                if (res.data.code === 200)
+                    console.log(res.data.code,333);
+                this.categorys = res.data;
+                // console.log(this.categorys,222);
+            }).catch(err=>{
+                console.log("发生错误",err)
+            });
+
+            this.$http({
+                url: `http://127.0.0.1:8000/api/v1/brands/`,
+                method: "get"
+            }).then(res=>{
+                // console.log(res.data,111);
+                if (res.data.code === 200)
+                    console.log(res.data.code,333);
+                this.brands = res.data;
+                // console.log(this.brands,222);
+            }).catch(err=>{
+                console.log("发生错误",err)
+            });
+
+            this.$http({
+                url: `http://127.0.0.1:8000/api/v1/goods/`,
+                method: "get"
+            }).then(res=>{
+                // console.log(res.data,111);
+                if (res.data.code === 200)
+                    console.log(res.data.code,333);
+                this.goods = res.data;
+                // console.log(this.goods,222);
+            }).catch(err=>{
+                console.log("发生错误",err)
+            });
 
         }
 
     }
 </script>
-
-
-
-
 
 
 <style scoped="scoped" lang="less">

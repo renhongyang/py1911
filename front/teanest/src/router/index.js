@@ -10,7 +10,8 @@ import Regist from '../views/Regist.vue'
 import ForgotPwd from "../views/ForgotPwd"
 import Login from "../views/Login"
 import Kefu from "../views/Kefu"
-import Userset from "../views/Userset";
+import Userset from "../views/Userset"
+import About from "../views/About"
 
 
 Vue.use(VueRouter);
@@ -34,7 +35,7 @@ const routes = [
     }
   },
   {
-    path: '/detail',
+    path: '/detail/:id',
     name: 'detail',
     component: Detail
   },
@@ -91,6 +92,11 @@ const routes = [
     path: '/userset',
     name: 'userset',
     component: Userset
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: About
   },
 
 ];
