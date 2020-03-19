@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+汽车详情
+{% endblock %}
+
+
+{% block main %}
+    <div class="col-md-8 col-md-offset-2">
+        <h3 class="center">汽车列表</h3>
+        <table class="table">
+      <tr>
+          <th>汽车编号</th>
+          <th>汽车名</th>
+      </tr>
+        {% for c in cars %}
+
+            <tr>
+                     <td>{{c.id}}</td>
+                     <td>{{c.name}}</td>
+
+            </tr>
+
+        {% endfor %}
+    </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+    {% block title%}
+    首页
+    {% endblock %}
+        {% block main %}
+        <table class="table table-bordered" style="text-align: center">
+            <thead style="text-align: center">当前用户：{{username}}</thead>
+                {% if username != "无用户登录" %}
+                <thead><a href="{{ url_for('userbp.loginout')}}" class="btn btn-default">账号登出</a></thead>
+                {% else %}
+                <thead><a href="{{ url_for('userbp.login')}}" class="btn btn-default">账号登录</a></thead>
+                {% endif %}
+			{% if cs %}
+				<th style="text-align: center">汽车列表编号</th ><th style="text-align: center">汽车列表名称</th>
+                {% for c in cs %}
+				<tr>
+                    <td>{{c.id}}</td>
+                    <td><a href="/categorys/{{c.id}}">{{c.name}}</a></td>
+				</tr>
+                {% endfor %}
+			{% else %}
+				<p>没有汽车列表</p>
+			{% endif %}
+        <br>
+        </table>
+        {% endblock %}

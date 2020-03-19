@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+    {% block title%}
+    管理页
+    {% endblock %}
+        {% block main %}
+             <table class="table table-bordered" style="text-align: center">
+                 <thead><a href="/admin/category/add/" class="btn btn-default">添加分类</a></thead>
+                {% if cs %}
+				<th style="text-align: center">汽车列表编号</th >
+                 <th style="text-align: center">汽车列表名称</th>
+                 <th style="text-align: center">删除</th>
+                {% for c in cs %}
+				<tr>
+                    <td>{{c.id}}</td>
+                    <td>{{c.name}}</td>
+                    <td><a href="/admin/category/delete/{{c.id}}">删除分类</a></td>
+				</tr>
+                {% endfor %}
+                {% else %}
+                    <p>没有汽车列表</p>
+                {% endif %}
+              <br>
+             </table>
+                <br>
+                <table class="table table-bordered" style="text-align: center">
+                    <thead><a href="/admin/car/add/" class="btn btn-default">添加汽车</a></thead>
+                {% if cars %}
+				    <th style="text-align: center">汽车编号</th >
+                    <th style="text-align: center">汽车名称</th>
+                    <th style="text-align: center">所属列表</th>
+                    <th style="text-align: center">删除</th>
+                {% for c in cars %}
+				<tr>
+                    <td>{{c.id}}</td>
+                    <td>{{c.name}}</td>
+                    <td>{{c.category}}</td>
+                    <td><a href="/admin/car/delete/{{c.id}}">删除汽车</a></td>
+				</tr>
+                {% endfor %}
+                {% else %}
+                    <p>没有汽车</p>
+                {% endif %}
+              <br>
+             </table>
+        {% endblock%}
