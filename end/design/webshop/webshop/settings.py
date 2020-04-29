@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import datetime
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -152,7 +153,14 @@ REST_FRAMEWORK = {
     # 全局过滤
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 }
-
+JWT_AUTH = {
+    # 配置过期时间
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
+    # 是否可刷新
+    'JWT_ALLOW_REFRESH': True,
+    # 刷新过期时间
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
+}
 
 AUTH_USER_MODEL = 'juncinet.User'
 

@@ -41,17 +41,19 @@ router.register('orders', OrdersViewSets)
 urlpatterns = [
     path('admin/', admin.site.urls),
     # 配置RestFulAPI
-    path('api/v1/',include(router.urls)),
+    path('api/v1/', include(router.urls)),
     # 为了在DRF路由调试界面能够使用用户相关功能需要引入以下路由
-    path('',include('rest_framework.urls')),
+    path('', include('rest_framework.urls')),
 
-    url('media/(?P<path>.*)',serve, {'document_root': MEDIA_ROOT}),
+    url('media/(?P<path>.*)', serve, {'document_root': MEDIA_ROOT}),
     # API文档地址
     path('api/v1/docs/', include_docs_urls(title="RestFulAPI", description="RestFulAPI v1")),
 
     # 先通过用户名密码 得到Token  VUE将refresh以及access保存  通过access请求服务器   通过refresh获取新的access
-    url(r'^obtaintoken/$', token_obtain_pair,name='login'),
+    url(r'^obtaintoken/$', token_obtain_pair, name='login'),
     url(r'^refreshtoken/$', token_refresh, name='refresh'),
+    url(r'^getuserinfo/$', getuserinfo),
+    url(r'^sendmsg/$', sendmsg),
 
 
 ]

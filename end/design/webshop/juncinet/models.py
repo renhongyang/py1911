@@ -64,8 +64,8 @@ class User(AbstractUser):
 
 
 class Orders(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="用户",null=True)
-    good = models.ManyToManyField(Goods, verbose_name="商品",null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="用户", null=True)
+    good = models.ManyToManyField(Goods, verbose_name="商品", null=True)
     num = models.PositiveIntegerField(default=0, verbose_name="购买数量")
 
 

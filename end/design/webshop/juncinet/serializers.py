@@ -16,12 +16,12 @@ class GoodsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Goods
-        fields ="__all__"
+        fields = "__all__"
 
 class CategorysSerizlizer(serializers.Serializer):
 
     id = serializers.IntegerField(read_only=True)
-    title = serializers.CharField(max_length=10,min_length=2,error_messages={
+    title = serializers.CharField(max_length=10, min_length=2, error_messages={
         "max_length": "最多10个字",
         "min_length": "最少2个字"
     })
@@ -29,14 +29,14 @@ class CategorysSerizlizer(serializers.Serializer):
     def create(self, validated_data):
 
         instance = Categorys.objects.create(**validated_data)
-        #print("创建模型实例",instance)
+        # print("创建模型实例",instance)
         return instance
 
     def update(self, instance, validated_data):
 
-        #print("重写更新方法",validated_data,instance.name)
+        # print("重写更新方法",validated_data,instance.name)
         instance.name = validated_data.get("title", instance.name)
-        #print(instance.name)
+        # print(instance.name)
         instance.save()
         return instance
 
@@ -58,13 +58,14 @@ class TimegoodsSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-
+    # username = serializers.CharField(write_only=True)
+    # password = serializers.CharField(write_only=True)
     class Meta:
         model = User
         # __all__ 代表模型中的所有字段
         # fields = "__all__"
-        #不显示某些字段
-        exclude = ["user_permissions", "groups", "first_name", "last_name"]
+        # 不显示某些字段
+        exclude = ["user_permissions", "groups", "first_name", "last_name", "password"]
 
     def validate(self, attrs):
         # 对用户密码进行哈希加密，在数据库中不会以明文显示
@@ -106,8 +107,8 @@ class UserRegisterSerializer(serializers.Serializer):
         return User.objects.create_user(username=validated_data.get("username"), email=validated_data.get("email"),
                                         password=validated_data.get("password"), telephone=validated_data.get("telephone"))
 
-        #通用创建,密码不被加密
-        #return User.objects.create(**validated_data)
+        # 通用创建,密码不被加密
+        # return User.objects.create(**validated_data)
 
 class OrderSerializer(serializers.ModelSerializer):
 
