@@ -8,16 +8,11 @@
                     @click-left="onClickLeft"
                     @click-right="onClickRight">
                 <van-icon name="wap-home-o" slot="left"  color="black" size="18px"></van-icon>
-                <!--                <div class="header-img">-->
-                <van-image
-                        width="50px"
-                        height="1.2rem"
-                        src="http://www.chawo.com/wap/images/chawo-logo.png"
-                        slot="left"
-                >
-                </van-image>
-                <!--                </div>-->
+
+
+
             </van-nav-bar>
+            <img src="../assets/name.png">
         </div>
         <van-divider :style="{ borderColor: 'black', border:2, marginTop:10}"></van-divider>
 
@@ -31,20 +26,29 @@
                         placeholder="请输入用户名">
                 </van-field>
                 <van-field
+                        v-model="email"
+                        label="邮箱号"
+                        required
+                        clearable
+                        placeholder="请输入邮箱号"
+                >
+                </van-field>
+                <van-field
                         v-model="telephone"
                         label="手机号"
                         required
                         clearable
                         placeholder="请输入11位手机号"
                 >
+                    <van-button slot="button" size="small" type="danger" @click="sendmsg" plain hairline>发送验证码</van-button>
                 </van-field>
                 <van-field
-                        v-model="sms"
+                        v-model="verify"
                         required
                         clearable
                         label="验证码"
-                        placeholder="请输入6位短信验证码">
-                    <van-button slot="button" size="small" type="danger" plain hairline>发送验证码</van-button>-->
+                        placeholder="请输入6位短信验证码"
+                        :rules="[{ required: true, message: '请填写验证码' }]">
                 </van-field>
                 <van-field
                     v-model="password"
@@ -64,7 +68,7 @@
             <br>
             <div class="logbot">
                 <van-checkbox v-model="checked" checked-color="#07c160">同意</van-checkbox>
-                <a href="http://www.chawo.com/wap/tmpl/member/document.html">用户注册协议</a>
+                <a href="#">用户注册协议</a>
             </div>
             <br>
             <van-button slot="button" size="large" type="danger" plain hairline @click="register">注册</van-button>
@@ -81,9 +85,9 @@
                 password:"",
                 password1:"",
                 telephone:"",
-                sms:"",
+                email:"",
+                verify:"",
                 checked: false
-
             }
 
         },
@@ -94,8 +98,18 @@
             onClickRight() {
                 this.$router.push("/login/");
             },
+            sendmsg(){
+                console.log("发送验证码");
+                this.$api.sendmsg({
+                    telephone:this.telephone
+                }).then(res=>{
+                    console.log("发送成功");
+                }).catch(err=>{
+                    console.log("发送失败");
+                })
+            },
             register() {
-                if(this.username.length<=0||this.password.length<6||this.password1.length<6||this.password!==this.password1||this.telephone.length!==11||this.sms.length!==6||this.checked!==true){
+                if(this.username.length<=0||this.password.length<6||this.email.length<6||this.password1.length<6||this.password!==this.password1||this.telephone.length!==11||this.sms.length!==6||this.checked!==true){
                     this.$toast("必填项不能为空！或者输入有误！")
                 }else {
                     // this.$toast("注册成功！");
@@ -103,7 +117,8 @@
                         username:this.username,
                         password:this.password,
                         password1:this.password1,
-                        telephone:this.telephone
+                        telephone:this.telephone,
+                        email: this.email
                     }).then(res=>{
                         this.$router.push("/login/")
                     }).catch(err=>{
@@ -121,11 +136,15 @@
         width: 100%;
         height:30px;
         background-color:beige;
+        img{
+            z-index: 5 ;
+            width: 50px;
+            position: absolute;
+            top: 15px;
+            left: 50px;
+        }
     }
-    .header-img{
-        margin-right: 30px;
 
-    }
     .logbot{
         display: flex;
         justify-content: center;

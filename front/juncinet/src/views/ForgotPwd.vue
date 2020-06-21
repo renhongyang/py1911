@@ -9,15 +9,8 @@
                     @click-right="onClickRight">
                 <van-icon name="wap-home-o" slot="left"  color="black" size="18px"></van-icon>
 <!--                <div class="header-img">-->
-                    <van-image
-                       width="50px"
-                       height="1.2rem"
-                       src="http://www.chawo.com/wap/images/chawo-logo.png"
-                       slot="left"
-                    >
-                    </van-image>
-<!--                </div>-->
             </van-nav-bar>
+            <img src="../assets/name.png">
         </div>
         <van-divider :style="{ borderColor: 'black', border:2, marginTop:10}"></van-divider>
 
@@ -84,6 +77,13 @@
         width: 100%;
         height:30px;
         background-color:beige;
+        img{
+            z-index: 5 ;
+            width: 50px;
+            position: absolute;
+            top: 15px;
+            left: 50px;
+        }
     }
     .header-img{
         margin-right: 30px;

@@ -12,7 +12,7 @@
               </div>
 
               <div >
-<!--                  <van-icon name="http://www.chawo.com/wap/images/more_w.png" size="30"></van-icon>-->
+<!--                  <van-icon name="#" size="30"></van-icon>-->
                 <img src="../assets/more_w.png" alt=""
                      style="width: 30px" @click="Gomine">
               </div>

@@ -21,7 +21,7 @@
 
                 <div  v-else>
                     <img src="../assets/headimg.png" alt="">
-                    <p>钧瓷小白<span style="color:aquamarine;font-size: 10px">普通会员</span>
+                    <p>{{$jsCookie.get("username")}}<span style="color:aquamarine;font-size: 10px">普通会员</span>
                         <van-button color="#ff0000" size="mini" @click="changeState">{{issign?"已签到":"签到"}}</van-button></p>
                 </div>
 
@@ -87,7 +87,6 @@
                     <van-grid-item
                             icon="points"
                             text="积分订单">
-<!--                            url="http://www.chawo.com/wap/tmpl/product_list.html?xianshi=1"-->
                     </van-grid-item>
 
                 </van-grid>
@@ -220,17 +219,6 @@
                         120100: '天津市',
                         120200: '县'
                     },
-                    // county_list: {
-                    //     110101: '东城区',
-                    //     110102: '西城区',
-                    //     110105: '朝阳区',
-                    //     110106: '丰台区'
-                    //     120101: '和平区',
-                    //     120102: '河东区',
-                    //     120103: '河西区',
-                    //     120104: '南开区',
-                    //     120105: '河北区',
-                    // }
                 },
                 searchResult: [],
                 list: [
@@ -319,7 +307,6 @@
 <style scoped="scoped" lang="less">
     .member-top {
         background-color: #f75c5c;
-        background-image: url(http://www.chawo.com/wap/images/member_top_bg.png);
         background-size: cover;
         text-align: center;
         width: 100%;

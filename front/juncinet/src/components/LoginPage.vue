@@ -4,14 +4,10 @@
             合作账号登录
         </van-divider>
         <div id="qqLoginBtn">
-            <van-image
-                    width="2rem"
-                    height="2rem"
-                    src="http://www.chawo.com/wap/images/qq.png">
-            </van-image>
+            <a href="https://connect.qq.com/manage.html#/"><img src="../assets/qq.png" alt=""></a>
         </div>
         <van-divider :style="{ color: '#343434', borderColor: '#000000', padding: '0 16px' }">
-            茶窝账号登录
+            账号登录
         </van-divider>
 
 <!--        <div class="phologin" v-show="phoshow">-->

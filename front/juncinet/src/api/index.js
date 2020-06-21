@@ -33,10 +33,9 @@ axios.interceptors.response.use(function (response) {
 		jsCookie.remove("access");
 		jsCookie.remove("refresh");
 		jsCookie.remove("username");
+		jsCookie.remove("userinfo");
 
 	}
-
-
 
 	return Promise.reject(error);
 });
@@ -61,6 +60,19 @@ export const regist = (param)=>{
 
 export const getToken = (param)=>{
 	return axios.post("/obtaintoken/",param,)
+};
+export const getUserinfo = (param)=>{
+	return axios.get("/getuserinfo/",param,)
+};
+export const modifyUserInfo = (param)=>{
+	// console.log("提交更改数据",param);
+	let id = param.userinfo.id;
+	console.log(id,"===");
+	return axios.patch(`api/v1/users/${id}/`,param.userinfo,)
+};
+export const sendmsg = (param)=>{
+	// console.log(param,"===========");
+	return axios.post("sendmsg/",param,)
 };
 
 

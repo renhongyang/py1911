@@ -302,7 +302,6 @@
             position: absolute;
             top: 10px;
             left: 50px;
-
         }
     }
 

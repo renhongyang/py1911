@@ -35,8 +35,8 @@ export default new Vuex.Store({
         state.goodList[index].num+=good.num;
       }
     },
-    removeGood(state,good){
-      data.goodList.remove(good);
+    removeGood(state,index){
+      state.goodList.splice(index,1)
     },
     ChangeGoodNum(state,index_num){
 

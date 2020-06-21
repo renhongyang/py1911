@@ -14,7 +14,7 @@ import Login from "../views/Login"
 import Kefu from "../views/Kefu"
 import Userset from "../views/Userset"
 import About from "../views/About"
-
+import Order from "../views/Order"
 
 Vue.use(VueRouter);
 
@@ -113,6 +113,11 @@ const routes = [
     path: '/about',
     name: 'about',
     component: About
+  },
+  {
+    path: '/order/',
+    name: 'order',
+    component: Order
   },
 
 ];

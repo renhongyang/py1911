@@ -7,14 +7,10 @@
                     @click-left="onClickLeft">
                 <van-icon name="wap-home-o" slot="left"  color="black" size="18px"></van-icon>
 
-                <van-image class="header-img"
-                           width="50px"
-                           height="1rem"
-                           src="http://www.chawo.com/wap/images/chawo-logo.png"
-                           slot="right"
-                >
-                </van-image>
+
             </van-nav-bar>
+            <img src="../assets/name.png">
+
         </div>
         <van-divider :style="{ borderColor: 'black', border:2, marginTop:10}"></van-divider>
 
@@ -149,31 +145,33 @@
                     // if(this.$route.query.t){
                     //     this.$router.push(this.$route.query.t);
                     // }
-                    // this.$api.getToken({
-                    //     username:this.loginusername,
-                    //     password:this.loginpassword
-                    // }).then(res=>{
-                    //     console.log("得到Token",res);
-                    //     this.$jsCookie.set("refresh",res.data.refresh);
-                    //     this.$jsCookie.set("access",res.data.access);
-                    //     this.$jsCookie.set("username",this.username);
-                    //     this.$router.push("mine");
-                    //     this.$store.commit("setLog",true)
+                    this.$api.getToken({
+                        username:this.loginusername,
+                        password:this.loginpassword
+                    }).then(res=>{
+                        // console.log("得到Token",res);
+                        this.$jsCookie.set("refresh",res.data.refresh);
+                        this.$jsCookie.set("access",res.data.access);
+                        this.$jsCookie.set("username",this.loginusername);
+                        this.$router.push("/mine/");
+                        // this.$store.commit("setLog",true);
+                        localStorage.setItem("login",true);
+                        // this.$toast("登陆成功！");
 
-                    // }).catch(err=>{
-                    //     console.log("发生错误",err);
-                    //     this.$toast("登录出错")
-                    // });
-                    localStorage.setItem("login",true);
-                    this.$toast("登陆成功！");
-                    this.$router.push("/mine/");
+                    }).catch(err=>{
+                        console.log("发生错误",err);
+                        this.$toast("登录出错")
+                    });
+                    // localStorage.setItem("login",true);
+                    // this.$toast("登陆成功！");
+                    // this.$router.push("/mine/");
 
                 }
 
             },
 
         },
-        params:['flag']
+        // params:['flag']
 
     }
 </script>
@@ -183,6 +181,13 @@
         width: 100%;
         height:30px;
         background-color:beige;
+        img{
+            z-index: 5 ;
+            width: 50px;
+            position: absolute;
+            top: 15px;
+            right: 50px;
+        }
     }
     .logbot{
         display: flex;

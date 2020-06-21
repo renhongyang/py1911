@@ -88,7 +88,7 @@
             addCart(){
                 this.show=false;
                 this.$toast("加入成功");
-                this.$store.commit("addGood",{num:this.buyNum})
+                this.$store.commit("addGood",{num:this.buyNum,img:this.detailgood.img,name:this.detailgood.name,price:this.detailgood.price,})
             }
         },
 
